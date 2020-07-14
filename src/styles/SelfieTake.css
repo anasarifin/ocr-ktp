@@ -1,0 +1,39 @@
+.selfie-container {
+	position: relative;
+	width: 100%;
+	max-width: 720px;
+	margin: auto;
+}
+.selfie-container.main {
+	top: 0;
+	position: absolute;
+}
+.selfie-container.dark {
+	position: relative;
+	filter: brightness(0.3);
+}
+
+.selfie-frame {
+	position: absolute;
+	top: -40px;
+	left: 50%;
+	transform: translate(-50%);
+}
+.selfie-frame svg {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+}
+.selfie-frame .rectangle {
+	top: -40px;
+}
+
+.button-camera {
+	display: grid;
+	position: absolute;
+	grid-template-columns: 2fr 3fr 2fr;
+	width: 100%;
+	background-color: salmon;
+	bottom: 0;
+	left: 0;
+}
