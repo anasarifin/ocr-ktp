@@ -21,12 +21,21 @@ const SelfieTake = () => {
 		};
 	};
 
+	useEffect(() => {
+		const elementSvg = document.getElementsByClassName("svg-container")[0] as SVGElement;
+		const elementDiv = document.getElementsByClassName("selfie-frame")[0] as HTMLDivElement;
+		const boundSvg = elementSvg.getBoundingClientRect();
+		const boundDiv = elementDiv.getBoundingClientRect();
+		const frame = document.getElementsByClassName("dummy-frame");
+		console.log(elementSvg.getBoundingClientRect());
+	}, []);
+
 	return (
 		<div className="container">
 			<Header title="Take Photo" body="Position your selfie within the light area and make sure both of your face fully visible" center={true} />
 			<br />
 			<div className="selfie-container">
-				<div className="selfie-container dark">
+				{/* <div className="selfie-container dark">
 					<Webcam
 						audio={false}
 						mirrored={true}
@@ -35,7 +44,7 @@ const SelfieTake = () => {
 							facingMode: "user",
 						}}
 					/>
-				</div>
+				</div> */}
 
 				<div className="selfie-container main">
 					<Webcam
@@ -52,17 +61,33 @@ const SelfieTake = () => {
 				</div>
 
 				<div className="selfie-frame">
-					<svg viewBox="0 0 100 200" className="ellipse" style={{ height: "40vh" }}>
-						<ellipse cx="50" cy="100" rx="50" ry="55" />
+					<div className="dummy-frame" />
+					<svg viewBox="0 0 1080 2160">
+						<defs>
+							<mask id="clipping">
+								<rect x="0" y="0" width="100%" height="100%" fill="white" />
+								<ellipse cx="540" cy="30%" rx="400" ry="440" fill="black" />
+								<rect width="680" height="450" x="200" y="60%" fill="black" />
+							</mask>
+						</defs>
+						<rect x="0" y="0" width="100%" height="100%" mask="url(#clipping)" className="svg-container" fillOpacity="60%" />
 					</svg>
-					<br />
+					{/* <br />
 					<svg className="rectangle" style={{ width: "30vw", height: "17vw" }}>
-						<rect width="100%" height="100%" />
-					</svg>
+						
+					</svg> */}
+					<div className="dummy-frame" />
 				</div>
 
 				<div className="button-camera">
-					<button type="button">Flashlight</button>
+					<button
+						type="button"
+						onClick={() => {
+							const wew = document.getElementsByClassName("svg-container")[0] as SVGElement;
+							console.log(wew.getBoundingClientRect());
+						}}>
+						Flashlight
+					</button>
 					<button type="button" onClick={onShotCamera}>
 						Click
 					</button>

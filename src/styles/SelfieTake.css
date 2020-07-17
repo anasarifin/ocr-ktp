@@ -1,26 +1,42 @@
 .selfie-container {
 	position: relative;
 	width: 100%;
-	max-width: 720px;
+	max-width: 1080px;
 	margin: auto;
 }
 .selfie-container.main {
 	top: 0;
-	position: absolute;
-}
-.selfie-container.dark {
 	position: relative;
+}
+
+.dummy-frame {
+	position: absolute;
+	height: 100%;
+	background-color: black;
+	opacity: 0.6;
+}
+/* .selfie-container.dark {
 	filter: brightness(0.3);
+} */
+.svg-container::after {
+	content: "";
+	width: 200px;
+	height: 200px;
+	background-color: salmon;
 }
 
 .selfie-frame {
 	position: absolute;
-	top: -40px;
+	height: 100%;
+	top: 0px;
 	left: 50%;
+	width: 100%;
 	transform: translate(-50%);
 }
 .selfie-frame svg {
 	position: relative;
+	height: 100%;
+	width: 100%;
 	left: 50%;
 	transform: translate(-50%);
 }
