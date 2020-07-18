@@ -4,13 +4,25 @@
 	text-align: center;
 	width: 100%;
 	max-width: 1080;
-	margin-bottom: 20px;
+	margin: 30px auto;
 }
 .idType-choices.active {
-	color: purple;
+	color: #6558f5;
 }
 
 .idCam-container {
+	position: relative;
+	width: 95%;
+	margin: auto;
 	border-radius: 10px;
 	overflow: hidden;
+}
+.idCam-container div {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.button-camera {
+	background-color: white;
 }

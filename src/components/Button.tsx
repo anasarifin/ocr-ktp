@@ -1,9 +1,12 @@
 import React from "react";
+import "../styles/Button.css";
 
-const Button = ({ left, right }: Props) => {
+const Button = ({ left, right, reset }: Props) => {
 	return (
-		<div>
-			<button type="button">{left}</button>
+		<div className="button-container">
+			<button type="button" onClick={reset}>
+				{left}
+			</button>
 			<button type="button">{right}</button>
 		</div>
 	);
@@ -12,6 +15,7 @@ const Button = ({ left, right }: Props) => {
 interface Props {
 	left: string;
 	right: string;
+	reset: () => void;
 }
 
 export default Button;

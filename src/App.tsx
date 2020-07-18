@@ -1,11 +1,11 @@
 import React from "react";
-import Main from "./pages/IDReview";
+import Main from "./pages/IDTake";
 import "./styles/Main.css";
 
 const App = () => {
 	return (
 		<div>
-			<Main />
+			<Main type={0}/>
 		</div>
 	);
 };

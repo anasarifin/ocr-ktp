@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
+import "../styles/Input.css";
 
-const Input = ({ type }: Props) => {
-	const [inputValue, setInputValue] = useState({});
-
+const Input = ({ type, inputId, inputName, setInputId, setInputName }: Props) => {
 	const setTitle = (param: number): string => {
 		switch (param) {
 			case 1:
@@ -19,116 +18,133 @@ const Input = ({ type }: Props) => {
 		switch (param) {
 			case 2:
 				return (
-					<div>
+					<>
 						<input
-							value={inputValue[0] || ""}
+							value={inputId[0] || ""}
 							onChange={(e: React.FormEvent): void => {
 								const regex = /^[a-z]{0,2}$/i;
 								if (regex.test(e.target.value)) {
-									setInputValue({ ...inputValue, [0]: e.target.value });
+									setInputId({ ...inputId, [0]: e.target.value });
 								}
 							}}
 						/>
 						<input
 							type="number"
-							value={inputValue[1] || ""}
+							value={inputId[1] || ""}
 							onChange={(e: React.FormEvent): void => {
 								const regex = /^[0-9]{0,4}$/;
 								if (regex.test(e.target.value)) {
-									setInputValue({ ...inputValue, [1]: e.target.value });
+									setInputId({ ...inputId, [1]: e.target.value });
 								}
 							}}
 						/>
 						<input
 							type="number"
-							value={inputValue[2] || ""}
+							value={inputId[2] || ""}
 							onChange={(e: React.FormEvent): void => {
 								const regex = /^[0-9]{0,4}$/;
 								if (regex.test(e.target.value)) {
-									setInputValue({ ...inputValue, [2]: e.target.value });
+									setInputId({ ...inputId, [2]: e.target.value });
 								}
 							}}
 						/>
-					</div>
+					</>
 				);
 			case 3:
 				return (
-					<div>
+					<>
 						{[0, 1, 2].map((x) => {
 							return (
 								<input
 									type="number"
-									value={inputValue[x] || ""}
+									value={inputId[x] || ""}
 									key={x}
 									onChange={(e: React.FormEvent): void => {
 										const regex = /^[0-9]{0,4}$/;
 										if (regex.test(e.target.value)) {
-											setInputValue({ ...inputValue, [x]: e.target.value });
+											setInputId({ ...inputId, [x]: e.target.value });
 										}
 									}}
 								/>
 							);
 						})}
 						<input
-							value={inputValue[3] || ""}
+							value={inputId[3] || ""}
 							onChange={(e: React.FormEvent): void => {
 								const regex = /^[0-9]{0,1}$/;
 								if (regex.test(e.target.value)) {
-									setInputValue({ ...inputValue, [3]: e.target.value });
+									setInputId({ ...inputId, [3]: e.target.value });
 								}
 							}}
 						/>
 						<input
-							value={inputValue[4] || ""}
+							value={inputId[4] || ""}
 							onChange={(e: React.FormEvent): void => {
 								const regex = /^[a-z]{0,1}$/i;
 								if (regex.test(e.target.value)) {
-									setInputValue({ ...inputValue, [4]: e.target.value.toUpperCase() });
+									setInputId({ ...inputId, [4]: e.target.value.toUpperCase() });
 								}
 							}}
 						/>
-					</div>
+					</>
 				);
 			default:
 				return (
-					<div>
+					<>
 						{[0, 1, 2, 3].map((x) => {
 							return (
 								<input
-									value={inputValue[x] || ""}
+									value={inputId[x] || ""}
+									type="number"
 									key={x}
 									onChange={(e: React.Form): void => {
 										const regex = /^[0-9]{0,4}$/;
 										if (regex.test(e.target.value)) {
 											console.log("masuk");
-											setInputValue({ ...inputValue, [x]: e.target.value });
+											setInputId({ ...inputId, [x]: e.target.value });
 										}
 									}}
 								/>
 							);
 						})}
-					</div>
+					</>
 				);
 		}
 	};
 
 	return (
-		<div>
-			<label>{setTitle(type)}</label>
-			{setForm(type)}
+		<div className="input-container">
+			<label>{setTitle(type)} NUMBER</label>
+			<div className={"inputId " + setTitle(type)}>{setForm(type)}</div>
 			<label>NAME</label>
+			<br />
 			<input
-				onKeyPress={(e: KeyboardEvent) => {
-					return /[a-z]/i.test(e.key);
+				className="inputName"
+				value={inputName}
+				onChange={(e: React.FormEvent): void => {
+					const regex = /^[a-z| ]*$/i;
+					if (regex.test(e.target.value)) {
+						setInputName(e.target.value.toUpperCase());
+					}
 				}}
-				placeholder="Your name"
 			/>
 		</div>
 	);
 };
 
+interface Input {
+	0?: string;
+	1?: string;
+	2?: string;
+	3?: string;
+	4?: string;
+}
 interface Props {
 	type: number;
+	inputId: Input;
+	inputName: string;
+	setInputId: (e: Input) => void;
+	setInputName: (e: string) => void;
 }
 
 export default Input;

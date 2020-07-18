@@ -17,7 +17,7 @@ const IDTake = () => {
 
 	return (
 		<div className="container">
-			<Header title="Take Photo" body="Position your ID within the light area and make sure the picture is clear and show complete information" center={true} />
+			<Header title="Take Photo" center={true} />
 			<div className="idType-container">
 				<span
 					className="idType-choices active"
@@ -52,7 +52,7 @@ const IDTake = () => {
 					SIM
 				</span>
 			</div>
-			<div className="idCam-container" style={{ height: (window.innerWidth / 5) * 3.5 }}>
+			<div className="idCam-container" style={{ height: (window.innerWidth / 14) * 8 }}>
 				<div>
 					<Webcam
 						audio={false}
@@ -66,17 +66,9 @@ const IDTake = () => {
 					/>
 				</div>
 			</div>
+			<span>Position your ID within the light area and make sure the picture is clear and show complete information</span>
 			<div className="button-camera">
-				<button
-					type="button"
-					onClick={() => {
-						const wew = document.getElementsByClassName("svg-container")[0] as SVGElement;
-						console.log(wew.getBoundingClientRect());
-					}}>
-					Flashlight
-				</button>
 				<button type="button">Click</button>
-				<button type="submit">Switch</button>
 			</div>
 		</div>
 	);
