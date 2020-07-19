@@ -15,7 +15,8 @@ const Button = ({ left, right, reset }: Props) => {
 interface Props {
 	left: string;
 	right: string;
-	reset: () => void;
+	reset?: () => void;
+	next?: () => void;
 }
 
 export default Button;

@@ -70,6 +70,7 @@ const Input = ({ type, inputId, inputName, setInputId, setInputName }: Props) =>
 						})}
 						<input
 							value={inputId[3] || ""}
+							type="number"
 							onChange={(e: React.FormEvent): void => {
 								const regex = /^[0-9]{0,1}$/;
 								if (regex.test(e.target.value)) {
@@ -77,6 +78,7 @@ const Input = ({ type, inputId, inputName, setInputId, setInputName }: Props) =>
 								}
 							}}
 						/>
+						<div />
 						<input
 							value={inputId[4] || ""}
 							onChange={(e: React.FormEvent): void => {
@@ -97,7 +99,7 @@ const Input = ({ type, inputId, inputName, setInputId, setInputName }: Props) =>
 									value={inputId[x] || ""}
 									type="number"
 									key={x}
-									onChange={(e: React.Form): void => {
+									onChange={(e: React.FormEvent): void => {
 										const regex = /^[0-9]{0,4}$/;
 										if (regex.test(e.target.value)) {
 											console.log("masuk");

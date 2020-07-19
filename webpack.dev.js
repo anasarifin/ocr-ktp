@@ -39,7 +39,8 @@ module.exports = () => {
 					exclude: /node_modules/,
 					options: {
 						presets: ["@babel/preset-env", "@babel/preset-react", "@babel/typescript"],
-						// plugins: ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread", "inline-react-svg"],
+						plugins: ["inline-react-svg"],
+						// "@babel/proposal-class-properties", "@babel/proposal-object-rest-spread",
 					},
 				},
 				{

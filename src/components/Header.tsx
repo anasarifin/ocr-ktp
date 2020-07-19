@@ -4,7 +4,7 @@ import "../styles/Header.css";
 const Header = ({ title, body, center }: Props) => {
 	return (
 		<div className="header">
-			<h2 className="header-title">{title}</h2>
+			<h2 className={"header-title" + (center ? " center" : "")}>{title}</h2>
 			<span className="header-body">{body}</span>
 		</div>
 	);

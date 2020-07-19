@@ -1,6 +1,9 @@
 .header {
-	margin-bottom: 20px;
+	margin: 10px 0;
 }
 .header-title {
 	margin-bottom: 10px;
+}
+.header-title.center {
+	text-align: center;
 }

@@ -6,6 +6,13 @@
 	box-sizing: border-box;
 	margin: 5px 0 20px 0;
 }
+.inputId.PASSPORT {
+	grid-template-columns: 15% repeat(3, 22%);
+}
+.inputId.SIM {
+	grid-template-columns: repeat(3, 20%) 12% 2% 12%;
+}
+
 .inputId input {
 	height: 30px;
 	text-align: center;
