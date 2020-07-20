@@ -4,6 +4,10 @@
 .header-title {
 	margin-bottom: 10px;
 }
-.header-title.center {
+.header-body {
+	font-size: 0.9em;
+}
+
+.header .center {
 	text-align: center;
 }

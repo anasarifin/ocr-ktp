@@ -29,11 +29,20 @@
 	border-radius: 10px;
 	overflow: hidden;
 }
+
 .idCam-container div {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
+	width: 100%;
 }
+
+.idCam-container div video {
+	border-radius: 10px;
+}
+/* #idPlayer-hidden {
+	display: none;
+} */
 
 .shutter-button {
 	display: block;

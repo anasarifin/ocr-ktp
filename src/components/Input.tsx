@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Input.css";
 
-const Input = ({ type, inputId, inputName, setInputId, setInputName }: Props) => {
+const Input = ({ type, inputId, inputName, setInputId, setInputName, focus }: Props) => {
 	const setTitle = (param: number): string => {
 		switch (param) {
 			case 1:

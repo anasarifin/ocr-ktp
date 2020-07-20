@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import IDReview from "./IDReview";
 import Header from "../components/Header";
 import Webcam from "react-webcam";
 import "../styles/IDTake.css";
 
-const IDTake = () => {
+const IDTake = ({ close }: Props) => {
 	const [position2nd, setPosition2nd] = useState(0);
 	const [image, setImage] = useState("");
 	const [type, setType] = useState(0);
@@ -19,7 +19,7 @@ const IDTake = () => {
 	};
 
 	const onShoot = () => {
-		const image = webcamRef.current.getScreenshot({ width: 720, height: 1280 });
+		const image = webcamRef.current.getScreenshot();
 		setImage(image);
 		setPosition2nd(1);
 	};
@@ -61,15 +61,19 @@ const IDTake = () => {
 					SIM
 				</span>
 			</div>
-			<div className="idCam-container" style={{ height: (window.innerWidth / 14) * 8 }}>
+			<div className="idCam-container" style={{ height: (window.innerWidth / 14) * 7.5 }}>
 				<div>
 					<Webcam
 						audio={false}
 						ref={webcamRef}
-						screenshotFormat="image/jpeg"
+						forceScreenshotSourceSize={true}
+						screenshotFormat="image/png"
 						width={"100%"}
 						screenshotQuality={1}
 						videoConstraints={{
+							width: 720,
+							height: 1280,
+							// aspectRatio: 0.6666666667,
 							facingMode: "environment",
 						}}
 					/>
@@ -86,7 +90,10 @@ const IDTake = () => {
 					image={image}
 					type={type}
 					back={() => {
-						console.log("masuk");
+						setPosition2nd(0);
+					}}
+					close={() => {
+						close();
 						setPosition2nd(0);
 					}}
 				/>
@@ -94,5 +101,9 @@ const IDTake = () => {
 		</div>
 	);
 };
+
+interface Props {
+	close: () => void;
+}
 
 export default IDTake;

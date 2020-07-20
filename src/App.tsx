@@ -5,20 +5,25 @@ import { isMobile } from "mobile-device-detect";
 
 const App = () => {
 	const [xx, xxx] = useState("");
+	
 
-	useEffect(() => {
-		window.addEventListener("resize", () => {
-			if (document.activeElement.tagName === "INPUT") {
-				xxx(window.innerWidth + " x " + window.innerHeight);
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	setInitialHeight(window.innerHeight);
+	// 	window.addEventListener("resize", () => {
+	// 		if (document.activeElement.tagName === "INPUT") {
+	// 			if (initialHeight > 0) {
+	// 				xxx(`${initialHeight - window.innerHeight}`);
+	// 			}
+	// 		}
+	// 	});
+	// }, []);
 
 	useEffect(() => {
 		window.onbeforeunload = function () {
 			return true;
 		};
 	});
+
 	return (
 		<div>
 			{isMobile ? (

@@ -1,12 +1,18 @@
-.selfie-container {
+.selfieCam-container {
 	position: relative;
-	width: 100%;
-	max-width: 1080px;
-	margin: auto;
+	width: 95%;
+	margin: -10px auto 30px;
+	border-radius: 10px;
+	overflow: hidden;
 }
-.selfie-container.main {
-	top: 0;
-	position: relative;
+.selfieCam-container video {
+	border-radius: 10px;
+}
+.button-camera-selfie {
+	position: fixed;
+	left: 50%;
+	bottom: 5px;
+	transform: translate(-50%);
 }
 
 .dummy-frame {
@@ -44,7 +50,7 @@
 	top: -40px;
 }
 
-.button-camera {
+/* .button-camera {
 	display: grid;
 	position: absolute;
 	grid-template-columns: 2fr 3fr 2fr;
@@ -52,4 +58,4 @@
 	background-color: salmon;
 	bottom: 0;
 	left: 0;
-}
+} */
