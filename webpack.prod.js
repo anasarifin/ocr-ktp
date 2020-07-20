@@ -16,7 +16,7 @@ module.exports = () => {
 		output: {
 			filename: "[name].bundle.js",
 			chunkFilename: "[name].bundle.js",
-			path: path.resolve(__dirname, "docs"),
+			path: path.resolve(__dirname, "build"),
 			publicPath: "/",
 		},
 		resolve: {
@@ -37,6 +37,7 @@ module.exports = () => {
 					exclude: /node_modules/,
 					options: {
 						presets: ["@babel/preset-env", "@babel/preset-react", "@babel/typescript"],
+						plugins: ["inline-react-svg"],
 						// plugins: ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread", "inline-react-svg"],
 					},
 				},
