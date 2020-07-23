@@ -71,8 +71,8 @@ const IDTake = ({ close }: Props) => {
 						width={"100%"}
 						screenshotQuality={1}
 						videoConstraints={{
-							width: 720,
-							height: 1280,
+							width: 480,
+							height: 800,
 							// aspectRatio: 0.6666666667,
 							facingMode: "environment",
 						}}

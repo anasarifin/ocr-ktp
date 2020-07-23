@@ -133,7 +133,7 @@ const Input = ({ type, inputId, inputName, setInputId, setInputName, focus }: Pr
 		</div>
 	);
 };
-
+	
 interface Input {
 	0?: string;
 	1?: string;

@@ -13,6 +13,7 @@ const SelfieTake = ({ close }: Props) => {
 		const image = webcamRef.current.getScreenshot();
 		setImage(image);
 		setPosition2nd(1);
+		console.log(image);
 	};
 
 	return (
