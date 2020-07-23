@@ -28,7 +28,7 @@ const Card = ({ title, body, icon, check, click }) => {
 };
 
 const Main = () => {
-	const [id, setId] = useState("wew");
+	const [imageID, setImageID] = useState("");
 	const [page, setPage] = useState<ReactElement | null>(null);
 	const [checklist, setChecklist] = useState({
 		0: false,
@@ -72,9 +72,13 @@ const Main = () => {
 				click={() => {
 					setPage(
 						<IDTake
+							image={imageID}
 							close={() => {
 								setPosition(0);
 								setChecklist({ ...checklist, 0: true });
+							}}
+							setImage={(e: string) => {
+								setImageID(e);
 							}}
 						/>,
 					);

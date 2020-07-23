@@ -4,9 +4,8 @@ import Header from "../components/Header";
 import Webcam from "react-webcam";
 import "../styles/SelfieTake.css";
 
-const SelfieTake = ({ close }: Props) => {
+const SelfieTake = ({ image, setImage, close }: Props) => {
 	const [position2nd, setPosition2nd] = useState(0);
-	const [image, setImage] = useState("");
 	const webcamRef = useRef();
 
 	const onShoot = () => {
@@ -56,6 +55,8 @@ const SelfieTake = ({ close }: Props) => {
 };
 
 interface Props {
+	image: string;
+	setImage: (e: string) => void;
 	close: () => void;
 }
 

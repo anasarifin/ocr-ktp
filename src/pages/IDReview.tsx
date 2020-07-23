@@ -11,11 +11,14 @@ const IDTake = ({ type, image, back, close }: Props) => {
 	const [initialHeight, setInitialHeight] = useState(0);
 	const [data, setData] = useState("");
 	const containerRef = useRef<HTMLDivElement>();
-	const canvasRef = useRef<HTMLCanvasElement>();
 
 	useEffect(() => {
 		setInitialHeight(window.innerHeight);
 	}, []);
+
+	useEffect(() => {
+		console.log(image);
+	}, [image]);
 
 	useEffect(() => {
 		if (initialHeight > 0) {
@@ -57,12 +60,17 @@ const IDTake = ({ type, image, back, close }: Props) => {
 				}}
 				next={() => {
 					axios
-						.post("https://18.212.147.11:3000/translate")
-						.then((resolve) => console.log(resolve.data))
+						.post("https://192.168.43.33:3000/translate", { img_ktp: image.slice(22) })
+						.then((resolve) => {
+							if (resolve.data.success) {
+								close();
+							} else {
+								alert("Image not valid!");
+							}
+						})
 						.catch((reject) => console.log(reject));
 				}}
 			/>
-			<canvas ref={canvasRef} style={{ display: "none" }} />
 		</div>
 	);
 };

@@ -4,11 +4,14 @@ import Header from "../components/Header";
 import Webcam from "react-webcam";
 import "../styles/IDTake.css";
 
-const IDTake = ({ close }: Props) => {
+const IDTake = ({ image, setImage, close }: Props) => {
 	const [position2nd, setPosition2nd] = useState(0);
-	const [image, setImage] = useState("");
 	const [type, setType] = useState(0);
 	const webcamRef = useRef();
+
+	useEffect(() => {
+		console.log(image);
+	}, [image]);
 
 	const onClickType = (e) => {
 		const element = document.getElementsByClassName("idType-choices") as HTMLCollectionOf<HTMLSpanElement>;
@@ -19,8 +22,8 @@ const IDTake = ({ close }: Props) => {
 	};
 
 	const onShoot = () => {
-		const image = webcamRef.current.getScreenshot();
-		setImage(image);
+		const imageNew = webcamRef.current.getScreenshot();
+		setImage(imageNew);
 		setPosition2nd(1);
 	};
 
@@ -103,6 +106,8 @@ const IDTake = ({ close }: Props) => {
 };
 
 interface Props {
+	image: string;
+	setImage: (e: string) => void;
 	close: () => void;
 }
 
