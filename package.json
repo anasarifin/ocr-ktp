@@ -11,7 +11,9 @@
     "mobile-device-detect": "^0.4.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-webcam": "^5.2.0"
+    "react-signature-canvas": "^1.0.3",
+    "react-webcam": "^5.2.0",
+    "recoil": "0.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

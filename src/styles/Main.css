@@ -1,30 +1,38 @@
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 .container {
 	position: relative;
-	padding: 7px;
+	padding: 15px;
 }
-
-#xxx {
-	position: fixed;
-	z-index: 99;
-	background-color: red;
-	top: 10;
-	left: 10;
-}
-
 .border {
-	border: 1px solid black;
+	border: 0.8px solid rgba(0, 0, 0, 0.2);
 	margin: 20px auto;
 	position: relative;
 	display: grid;
 	grid-template-columns: 70px auto;
 	align-items: center;
 	padding: 10px 0;
+	border-radius: 5px;
+}
+.border.time {
+	margin-top: 25px;
+	color: rgba(0, 0, 0, 0.7);
+	border: 0.8px solid rgba(0, 0, 0, 0.02);
+	background-color: rgba(0, 0, 0, 0.05);
+}
+.border.time .countdown-time {
+	font-size: 1.3rem;
+	color: #d3455b;
+	font-weight: bold;
 }
 .border .title {
 	font-weight: bold;
 }
 .border .body {
 	font-size: 0.8em;
+	color: rgba(0, 0, 0, 0.7);
 }
 .border svg {
 	width: 50px;
@@ -40,6 +48,15 @@
 	height: 15px;
 }
 
+.req-doc {
+	font-size: 0.7em;
+	margin: 35px 0 -5px 7px;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.7);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
 .sidebar {
 	position: fixed;
 	width: 100%;
@@ -47,14 +64,22 @@
 	top: 0;
 	left: 0;
 	background-color: white;
-	transition: 0.5s;
+	transition: 0.2s;
+	color: black;
 }
 .sidebar.front {
 	transform: translate3d(0, 0, 0);
+	opacity: 1;
 }
 .sidebar.right {
 	transform: translate3d(100%, 0, 0);
 }
 .sidebar.bottom {
 	transform: translate3d(0, 100%, 0);
+	opacity: 0;
+}
+
+.sidebar.black {
+	background-color: #212121;
+	color: white;
 }

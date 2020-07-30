@@ -23,7 +23,7 @@
 	border: 1.5px solid gray;
 }
 .inputId input:focus {
-	border: 1.5px solid #b2acfa;
+	border: 1.5px solid #d3455b;
 }
 .inputName {
 	height: 40px;
@@ -37,5 +37,5 @@
 	border: 1.5px solid gray;
 }
 .inputName:focus {
-	border: 1.5px solid #b2acfa;
+	border: 1.5px solid #d3455b;
 }

@@ -2,16 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import IDReview from "./IDReview";
 import Header from "../components/Header";
 import Webcam from "react-webcam";
+import { atom, useRecoilState } from "recoil";
 import "../styles/IDTake.css";
 
-const IDTake = ({ image, setImage, close }: Props) => {
+const IDTake = ({ close }: Props) => {
+	const [image, setImage] = useState("");
 	const [position2nd, setPosition2nd] = useState(0);
 	const [type, setType] = useState(0);
 	const webcamRef = useRef();
-
-	useEffect(() => {
-		console.log(image);
-	}, [image]);
 
 	const onClickType = (e) => {
 		const element = document.getElementsByClassName("idType-choices") as HTMLCollectionOf<HTMLSpanElement>;
@@ -70,9 +68,9 @@ const IDTake = ({ image, setImage, close }: Props) => {
 						audio={false}
 						ref={webcamRef}
 						forceScreenshotSourceSize={true}
-						screenshotFormat="image/png"
+						screenshotFormat="image/jpeg"
 						width={"100%"}
-						screenshotQuality={1}
+						screenshotQuality={0.5}
 						videoConstraints={{
 							width: 480,
 							height: 800,
@@ -83,11 +81,14 @@ const IDTake = ({ image, setImage, close }: Props) => {
 				</div>
 			</div>
 			<div className="center">Position your ID within the light area and make sure the picture is clear and show complete information</div>
-			<div className="button-camera">
-				<svg className="shutter-button" height="100" width="100" onClick={onShoot}>
-					<circle cx="50" cy="50" r="40" fill="red" />
-				</svg>
-			</div>
+			<svg className="shutter-button" height="100" width="100" onClick={onShoot}>
+				<mask id="shutter">
+					<rect x="0" y="0" width="100" height="100" fill="white" />
+					<circle cx="50" cy="50" r="38" fill="black" />
+				</mask>
+				<circle cx="50" cy="50" r="40" mask="url(#shutter)" fill="white" />
+				<circle cx="50" cy="50" r="35" fill="white" />
+			</svg>
 			<div className={"sidebar " + (position2nd ? "front" : "right")}>
 				<IDReview
 					image={image}
@@ -106,8 +107,6 @@ const IDTake = ({ image, setImage, close }: Props) => {
 };
 
 interface Props {
-	image: string;
-	setImage: (e: string) => void;
 	close: () => void;
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, ReactElement, useEffect } from "react";
 import IDTake from "./IDTake";
 import SelfieTake from "./SelfieTake";
+import SignatureTake from "./SignatureTake";
 
 import Header from "../components/Header";
 import Button from "../components/Button";
@@ -36,6 +37,7 @@ const Main = () => {
 		2: false,
 	});
 	const [position, setPosition] = useState(0);
+	const [black, setBlack] = useState(false);
 
 	const [countdown, setCountdown] = useState(3600);
 	const [countdownString, setCountdownString] = useState("");
@@ -53,32 +55,29 @@ const Main = () => {
 	return (
 		<div className="container">
 			<Header title="Verify Identity" body="Please verify your identity to confirm & secure your account. This will only take a few minutes." />
-			<div className="border">
+			<div className="border time">
 				<ClockIcon />
 				<div>
 					<span>COMPLETE BY</span>
 					<br />
-					<span>{countdownString}</span>
+					<span className="countdown-time">{countdownString}</span>
 					<br />
 					<span>to avoid order cancellation</span>
 				</div>
 			</div>
-			<span className="req-doc">Required documents</span>
+			<div className="req-doc">Required documents</div>
 			<Card
 				title="Identity"
 				body="e-KTP, KTP, Passport or SIM"
 				icon={<IDIcon className="icon" />}
-				check={checklist[0] ? <SuccessIcon /> : <NextIcon />}
+				check={checklist[0] ? <SuccessIcon /> : <NextIcon fill="red" />}
 				click={() => {
+					setBlack(true);
 					setPage(
 						<IDTake
-							image={imageID}
 							close={() => {
 								setPosition(0);
 								setChecklist({ ...checklist, 0: true });
-							}}
-							setImage={(e: string) => {
-								setImageID(e);
 							}}
 						/>,
 					);
@@ -89,8 +88,9 @@ const Main = () => {
 				title="Selfie with ID"
 				body="Take a selfie with your document"
 				icon={<SelfieIcon className="icon" />}
-				check={checklist[1] ? <SuccessIcon /> : <NextIcon />}
+				check={checklist[1] ? <SuccessIcon /> : <NextIcon fill="red" />}
 				click={() => {
+					setBlack(true);
 					setPage(
 						<SelfieTake
 							close={() => {
@@ -102,10 +102,20 @@ const Main = () => {
 					setPosition(1);
 				}}
 			/>
-			<Card title="Signature" body="Digital sign or take signature picture" icon={<SignatureIcon />} check={checklist[2] ? <SuccessIcon /> : <NextIcon />} />
+			<Card
+				title="Signature"
+				body="Digital sign or take signature picture"
+				icon={<SignatureIcon />}
+				check={checklist[2] ? <SuccessIcon /> : <NextIcon fill="red" />}
+				click={() => {
+					setBlack(false);
+					setPage(<SignatureTake />);
+					setPosition(1);
+				}}
+			/>
 			<Button left="Cancel" right="Next" />
 
-			<div className={"sidebar " + (position === 0 ? "right" : position === 1 ? "front" : "bottom")}>{page || <></>}</div>
+			<div className={"sidebar " + (black ? "black " : "") + (position === 0 ? "bottom" : "front")}>{page || <></>}</div>
 		</div>
 	);
 };

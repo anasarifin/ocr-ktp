@@ -4,7 +4,8 @@ import Header from "../components/Header";
 import Webcam from "react-webcam";
 import "../styles/SelfieTake.css";
 
-const SelfieTake = ({ image, setImage, close }: Props) => {
+const SelfieTake = ({ close }: Props) => {
+	const [image, setImage] = useState("");
 	const [position2nd, setPosition2nd] = useState(0);
 	const webcamRef = useRef();
 
@@ -24,20 +25,23 @@ const SelfieTake = ({ image, setImage, close }: Props) => {
 					audio={false}
 					ref={webcamRef}
 					forceScreenshotSourceSize={true}
-					screenshotFormat="image/png"
+					screenshotFormat="image/jpeg"
 					mirrored={true}
 					width={"100%"}
-					screenshotQuality={1}
+					screenshotQuality={0.5}
 					videoConstraints={{
 						facingMode: "user",
 					}}
 				/>
 			</div>
-			<div className="button-camera-selfie">
-				<svg className="shutter-button" height="100" width="100" onClick={onShoot}>
-					<circle cx="50" cy="50" r="40" fill="red" />
-				</svg>
-			</div>
+			<svg className="shutter-button" height="100" width="100" onClick={onShoot}>
+				<mask id="shutter">
+					<rect x="0" y="0" width="100" height="100" fill="white" />
+					<circle cx="50" cy="50" r="38" fill="black" />
+				</mask>
+				<circle cx="50" cy="50" r="40" mask="url(#shutter)" fill="white" />
+				<circle cx="50" cy="50" r="35" fill="white" />
+			</svg>
 			<div className={"sidebar " + (position2nd ? "front" : "right")}>
 				<SelfieReview
 					image={image}
@@ -55,8 +59,6 @@ const SelfieTake = ({ image, setImage, close }: Props) => {
 };
 
 interface Props {
-	image: string;
-	setImage: (e: string) => void;
 	close: () => void;
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Main from "./pages/Main";
 import "./styles/Main.css";
 import { isMobile } from "mobile-device-detect";
+import { RecoilRoot } from "recoil";
 import axios from "axios";
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
 		};
 	});
 
-	return <div>{isMobile ? <Main /> : <div>Sorry, this site just support for mobile version only.</div>}</div>;
+	return <RecoilRoot>{isMobile ? <Main /> : <div>Sorry, this site just support for mobile version only.</div>}</RecoilRoot>;
 };
 
 export default App;
