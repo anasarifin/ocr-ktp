@@ -50,6 +50,13 @@
 	top: -40px;
 }
 
+.shutter-button.selfie {
+	position: fixed;
+	left: 50%;
+	bottom: 10px;
+	transform: translate(-50%);
+}
+
 /* .button-camera {
 	display: grid;
 	position: absolute;

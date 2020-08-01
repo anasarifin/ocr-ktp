@@ -97,6 +97,7 @@ const IDTake = ({ close }: Props) => {
 						setPosition2nd(0);
 					}}
 					close={() => {
+						setImage("");
 						close();
 						setPosition2nd(0);
 					}}

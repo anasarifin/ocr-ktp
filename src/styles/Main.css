@@ -5,6 +5,7 @@ body {
 .container {
 	position: relative;
 	padding: 15px;
+	overflow: hidden;
 }
 .border {
 	border: 0.8px solid rgba(0, 0, 0, 0.2);

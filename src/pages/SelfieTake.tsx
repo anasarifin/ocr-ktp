@@ -20,7 +20,7 @@ const SelfieTake = ({ close }: Props) => {
 		<div className="container">
 			<Header title="Take Photo" body="Position your selfie within the light area and make sure both of your face fully visible" center={true} />
 			<br />
-			<div className="selfieCam-container" style={{ height: (window.innerWidth / 9) * 16 }}>
+			<div className="selfieCam-container">
 				<Webcam
 					audio={false}
 					ref={webcamRef}
@@ -34,7 +34,7 @@ const SelfieTake = ({ close }: Props) => {
 					}}
 				/>
 			</div>
-			<svg className="shutter-button" height="100" width="100" onClick={onShoot}>
+			<svg className="shutter-button selfie" height="100" width="100" onClick={onShoot}>
 				<mask id="shutter">
 					<rect x="0" y="0" width="100" height="100" fill="white" />
 					<circle cx="50" cy="50" r="38" fill="black" />

@@ -1,0 +1,29 @@
+.progress-bar {
+	position: fixed;
+	top: 0;
+	width: 70vw;
+	height: 4px;
+	background-color: #d3455b;
+	animation: loading 2s ease-in-out infinite alternate;
+	transform: translateZ(0);
+}
+
+@keyframes loading {
+	from {
+		left: -70vw;
+	}
+	to {
+		left: 100vw;
+	}
+}
+
+.status-bar {
+	display: inline-block;
+	width: 100%;
+	padding: 10px;
+	background-color: #d3455b;
+	color: white;
+	border-radius: 4px;
+	text-align: center;
+	box-sizing: border-box;
+}

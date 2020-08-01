@@ -2,14 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import ProgressBar from "../components/ProgressBar";
 import { useRecoilState } from "recoil";
 import { image as imageRecoil, type as typeRecoil } from "../recoil";
 import "../styles/IDReview.css";
 import axios from "axios";
 
 const IDTake = ({ type, image, back, close }: Props) => {
+	const [dataState, setData] = useState({ nik: false });
 	const [inputId, setInputId] = useState({});
 	const [inputName, setInputName] = useState("");
+	const [loading, setLoading] = useState(false);
+	const [status, setStatus] = useState("");
 	const [initialHeight, setInitialHeight] = useState(0);
 	const [imageState, setImageState] = useRecoilState(imageRecoil);
 	const [typeState, setTypeState] = useRecoilState(typeRecoil);
@@ -28,38 +32,70 @@ const IDTake = ({ type, image, back, close }: Props) => {
 		}
 	}, [initialHeight]);
 
-	const submitData = (type: string, name: string) => {
+	const submitData = (type_name: string, img_name: string) => {
+		if (dataState.nik) return compareData(dataState);
+
+		setLoading(true);
 		axios
-			.post(process.env.BASE_URL + `/${type}/translate`, { [name]: image.slice(23) })
+			.post(process.env.BASE_URL + `/${type_name}/translate`, { [img_name]: image.slice(23) })
 			.then((resolve) => {
+				console.log(resolve.data);
+
 				if (resolve.data.success) {
-					setImageState(image);
-					setTypeState(parseFloat(type));
-					close();
+					setData(resolve.data.data);
+					compareData(resolve.data.data);
 				} else {
-					if (type === "sim-old") {
-						submitData("sim-new", "img-sim");
+					if (type_name === "sim-new") {
+						submitData("sim-old", "img-sim");
 					} else {
-						alert("Image not valid!");
+						setStatus("ID card not valid, please try again with clearer photo.");
 					}
 				}
 			})
 			.catch((reject) => {
 				console.log(reject);
-				alert("An error occured!");
+				setStatus("Server down!");
+			})
+			.finally(() => {
+				setLoading(false);
 			});
+	};
+
+	const compareData = (data) => {
+		const elementId = document.getElementsByClassName("inputId")[0]?.querySelectorAll("input");
+		const elementName = document.getElementsByClassName("inputName")[0] as HTMLInputElement;
+		let number = "";
+		for (let x = 0; x < elementId.length; x++) {
+			number += elementId[x].value;
+		}
+
+		console.log(data);
+
+		if (data.nik != number) {
+			setStatus("ID number don't match with photo, please check again or retake photo with clearer view.");
+			return;
+		}
+		if (data.nama != elementName.value.toUpperCase()) {
+			setStatus("Name don't match with photo, please check again or retake photo with clearer view.");
+			return;
+		}
+
+		setImageState(image);
+		setTypeState(type);
+		close();
 	};
 
 	const onSubmit = () => {
 		if (type === 3) {
-			submitData("sim-old", "img-sim");
+			submitData("sim-new", "img_sim");
 		} else {
-			submitData("ktp", "img-ktp");
+			submitData("ktp", "img_ktp");
 		}
 	};
 
 	return (
 		<div className="container" ref={containerRef}>
+			<ProgressBar show={loading} status={status} />
 			<Header title="Review Photo" body="Please make sure your picture is clear and show complete information" />
 			<div className="review-photo" style={{ height: (window.innerWidth / 14) * 7.5, backgroundImage: `url('${image}')` }}></div>
 			<form>
@@ -79,6 +115,7 @@ const IDTake = ({ type, image, back, close }: Props) => {
 				left="Retake Photo"
 				right="Next"
 				reset={() => {
+					setData({ nik: false });
 					setInputId({});
 					setInputName("");
 					back();
