@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import { useRecoilValue } from "recoil";
@@ -10,6 +10,7 @@ const IDTake = ({ image, back, close }: Props) => {
 	const [height, setHeight] = useState(0);
 	const imageID = useRecoilValue(imageRecoil);
 	const type = useRecoilValue(typeRecoil);
+	const canvasRef = useRef();
 
 	const submitData = (type: string, name: string) => {
 		axios
@@ -44,6 +45,19 @@ const IDTake = ({ image, back, close }: Props) => {
 		setHeight(element.offsetHeight);
 	}, [image]);
 
+	useEffect(() => {
+		const canvas = canvasRef.current as HTMLCanvasElement;
+		const context = canvas.getContext("2d");
+		const imageObj = new Image();
+
+		imageObj.onload = function () {
+			canvasRef.current.width = (imageObj.width / 10) * 6;
+			canvasRef.current.height = (imageObj.height / 10) * 3;
+			context.drawImage(imageObj, (imageObj.width / 10) * 2, (imageObj.width / 10) * 7, (imageObj.width / 10) * 6, (imageObj.height / 10) * 3, 0, 0, (imageObj.width / 10) * 6, (imageObj.height / 10) * 3);
+		};
+		imageObj.src = image;
+	}, [image]);
+
 	return (
 		<div className="container">
 			<Header title="Review photo" body="Please make sure your picture is clear and show complete information" />
@@ -51,6 +65,7 @@ const IDTake = ({ image, back, close }: Props) => {
 				{/* <img src={image}/> */}
 			</div>
 			<Button left="Retake Photo" right="Next" reset={back} next={onSubmit} />
+			<canvas ref={canvasRef} />
 		</div>
 	);
 };
