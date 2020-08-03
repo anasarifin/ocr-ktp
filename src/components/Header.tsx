@@ -5,7 +5,7 @@ const Header = ({ title, body, center }: Props) => {
 	return (
 		<div className="header">
 			<h2 className={"header-title" + (center ? " center" : "")}>{title}</h2>
-			<span className={"header-body" + (center ? " center" : "")}>{body}</span>
+			<div className={"header-body" + (center ? " center" : "")}>{body}</div>
 		</div>
 	);
 };

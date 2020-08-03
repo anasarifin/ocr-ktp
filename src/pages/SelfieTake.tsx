@@ -1,47 +1,53 @@
 import React, { useState, useEffect, useRef } from "react";
 import SelfieReview from "./SelfieReview";
 import Header from "../components/Header";
+import Shutter from "../components/Shutter";
 import Webcam from "react-webcam";
 import "../styles/SelfieTake.css";
 
-const SelfieTake = ({ close }: Props) => {
+const SelfieTake = ({ close, cancel }: Props) => {
+	const [ready, setReady] = useState(false);
 	const [image, setImage] = useState("");
 	const [position2nd, setPosition2nd] = useState(0);
 	const webcamRef = useRef();
+	const selfieRef = useRef<HTMLDivElement>();
 
 	const onShoot = () => {
 		const image = webcamRef.current.getScreenshot();
 		setImage(image);
 		setPosition2nd(1);
-		console.log(image);
 	};
 
 	return (
 		<div className="container">
 			<Header title="Take Photo" body="Position your selfie within the light area and make sure both of your face fully visible" center={true} />
 			<br />
-			<div className="selfieCam-container">
+			<div className="selfieCam-container" ref={selfieRef}>
 				<Webcam
 					audio={false}
 					ref={webcamRef}
 					forceScreenshotSourceSize={true}
 					screenshotFormat="image/jpeg"
-					mirrored={true}
 					width={"100%"}
-					screenshotQuality={0.5}
+					screenshotQuality={1}
 					videoConstraints={{
 						facingMode: "user",
 					}}
+					onUserMedia={() => {
+						const element = document.getElementsByClassName("selfie-frame-id")[0] as HTMLDivElement;
+						element.style.width = (selfieRef.current.offsetWidth / 10) * 6 + "px";
+						element.style.height = (selfieRef.current.offsetWidth / 10) * 4 + "px";
+						element.style.left = (selfieRef.current.offsetWidth / 10) * 2 + "px";
+						element.style.top = (selfieRef.current.offsetWidth / 10) * 8 + "px";
+
+						setTimeout(() => {
+							setReady(true);
+						}, 1000);
+					}}
 				/>
+				<div className="selfie-frame-id" />
 			</div>
-			<svg className="shutter-button selfie" height="100" width="100" onClick={onShoot}>
-				<mask id="shutter">
-					<rect x="0" y="0" width="100" height="100" fill="white" />
-					<circle cx="50" cy="50" r="38" fill="black" />
-				</mask>
-				<circle cx="50" cy="50" r="40" mask="url(#shutter)" fill="white" />
-				<circle cx="50" cy="50" r="35" fill="white" />
-			</svg>
+			{ready ? <Shutter onShoot={onShoot} cancel={cancel} /> : <></>}
 			<div className={"sidebar " + (position2nd ? "front" : "right")}>
 				<SelfieReview
 					image={image}
@@ -60,6 +66,7 @@ const SelfieTake = ({ close }: Props) => {
 
 interface Props {
 	close: () => void;
+	cancel: () => void;
 }
 
 export default SelfieTake;

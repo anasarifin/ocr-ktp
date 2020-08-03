@@ -54,7 +54,7 @@ const IDTake = ({ type, image, back, close }: Props) => {
 			})
 			.catch((reject) => {
 				console.log(reject);
-				setStatus("Server down!");
+				setStatus("Server error, please try again later.");
 			})
 			.finally(() => {
 				setLoading(false);

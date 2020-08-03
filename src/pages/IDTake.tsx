@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import IDReview from "./IDReview";
 import Header from "../components/Header";
+import Shutter from "../components/Shutter";
 import Webcam from "react-webcam";
-import { atom, useRecoilState } from "recoil";
 import "../styles/IDTake.css";
 
-const IDTake = ({ close }: Props) => {
+const IDTake = ({ close, cancel }: Props) => {
 	const [image, setImage] = useState("");
 	const [position2nd, setPosition2nd] = useState(0);
 	const [type, setType] = useState(0);
@@ -81,14 +81,7 @@ const IDTake = ({ close }: Props) => {
 				</div>
 			</div>
 			<div className="center">Position your ID within the light area and make sure the picture is clear and show complete information</div>
-			<svg className="shutter-button" height="100" width="100" onClick={onShoot}>
-				<mask id="shutter">
-					<rect x="0" y="0" width="100" height="100" fill="white" />
-					<circle cx="50" cy="50" r="38" fill="black" />
-				</mask>
-				<circle cx="50" cy="50" r="40" mask="url(#shutter)" fill="white" />
-				<circle cx="50" cy="50" r="35" fill="white" />
-			</svg>
+			<Shutter onShoot={onShoot} cancel={cancel} />
 			<div className={"sidebar " + (position2nd ? "front" : "right")}>
 				<IDReview
 					image={image}
@@ -109,6 +102,7 @@ const IDTake = ({ close }: Props) => {
 
 interface Props {
 	close: () => void;
+	cancel: () => void;
 }
 
 export default IDTake;

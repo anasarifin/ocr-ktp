@@ -70,7 +70,7 @@ const Main = () => {
 				title="Identity"
 				body="e-KTP, KTP, Passport or SIM"
 				icon={<IDIcon className="icon" />}
-				check={checklist[0] ? <SuccessIcon /> : <NextIcon fill="red" />}
+				check={checklist[0] ? <SuccessIcon fill="red" /> : <NextIcon fill="red" />}
 				click={() => {
 					setBlack(true);
 					setPage(
@@ -78,6 +78,9 @@ const Main = () => {
 							close={() => {
 								setPosition(0);
 								setChecklist({ ...checklist, 0: true });
+							}}
+							cancel={() => {
+								setPosition(0);
 							}}
 						/>,
 					);
@@ -88,7 +91,7 @@ const Main = () => {
 				title="Selfie with ID"
 				body="Take a selfie with your document"
 				icon={<SelfieIcon className="icon" />}
-				check={checklist[1] ? <SuccessIcon /> : <NextIcon fill="red" />}
+				check={checklist[1] ? <SuccessIcon fill="red" /> : <NextIcon fill="red" />}
 				click={() => {
 					setBlack(true);
 					setPage(
@@ -96,6 +99,9 @@ const Main = () => {
 							close={() => {
 								setPosition(0);
 								setChecklist({ ...checklist, 1: true });
+							}}
+							cancel={() => {
+								setPosition(0);
 							}}
 						/>,
 					);
@@ -106,7 +112,7 @@ const Main = () => {
 				title="Signature"
 				body="Digital sign or take signature picture"
 				icon={<SignatureIcon />}
-				check={checklist[2] ? <SuccessIcon /> : <NextIcon fill="red" />}
+				check={checklist[2] ? <SuccessIcon fill="red" /> : <NextIcon fill="red" />}
 				click={() => {
 					setBlack(false);
 					setPage(<SignatureTake />);
